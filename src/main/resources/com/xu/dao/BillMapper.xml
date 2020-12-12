@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.dao.BillMapper">
+    <select id="getBillList" resultMap="map">
+        select * from ordering_sys.billToShow
+    </select>
+
+    <resultMap id="map" type="BillToShow">
+        <result property="billId" column="bId"/>
+        <result property="totalPrice" column="bPrice"/>
+        <result property="billTime" column="bTime"/>
+        <association property="user" javaType="User">
+            <result property="userName" column="uName"/>
+        </association>
+    </resultMap>
+
+    <delete id="deleteBill" parameterType="int">
+        delete from ordering_sys.bill where billId = #{billId}
+    </delete>
+
+    <select id="getBillsByName" parameterType="String" resultMap="map">
+        select * from ordering_sys.billToShow
+        where uName = #{userName}
+    </select>
+
+    <insert id="addBill" parameterType="Bill">
+        insert into ordering_sys.bill values (#{billId}, #{userId}, #{totalPrice}, #{billTime})
+    </insert>
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.dao.OrderingMapper">
+
+<!--select o.orderId oId,o.tableId tId,u.userName uName,m.dishesName dName,o.dishesNum dNum, o.orderTime oTime
+        from ordering_sys.ordering o,ordering_sys.user u,ordering_sys.menu m
+        where o.userId=u.userId and o.dishesId=m.dishesId
+-->
+    <select id="getOrderingList" resultMap="map" statementType="CALLABLE">
+        call ordering_sys.getOrderingList()
+    </select>
+    <resultMap id="map" type="Order">
+        <result property="orderId" column="oId"/>
+        <result property="tableId" column="tId"/>
+        <result property="dishesNum" column="dNum"/>
+        <result property="orderTime" column="oTime"/>
+
+        <association property="user" javaType="User">
+            <result property="userName" column="uName"/>
+        </association>
+
+        <association property="menu" javaType="Menu">
+            <result property="dishesName" column="dName"/>
+        </association>
+    </resultMap>
+
+    <delete id="deleteOrdering" parameterType="int">
+        delete from ordering_sys.ordering where orderId = #{orderId}
+    </delete>
+
+    <select id="getOrderingsByName" parameterType="String" resultMap="map">
+        select * from ordering_sys.orderingToShow
+        where uName=#{userName}
+    </select>
+
+    <select id="getOrderingsByDishName" parameterType="String" resultMap="map">
+        select o.orderId oId,o.tableId tId,u.userName uName,m.dishesName dName,o.dishesNum dNum, o.orderTime oTime
+        from ordering_sys.ordering o,ordering_sys.user u,ordering_sys.menu m
+        where o.userId=u.userId and o.dishesId=m.dishesId and m.dishesName=#{dishesName}
+    </select>
+
+    <insert id="addOrdering" parameterType="Ordering">
+        insert into ordering_sys.ordering values (#{orderId}, #{tableId}, #{userId}, #{dishesId}, #{dishesNum}, #{orderTime})
+    </insert>
+</mapper>

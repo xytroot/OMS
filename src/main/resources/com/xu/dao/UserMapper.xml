@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.xu.dao.UserMapper">
+    <!--select查询，id对应方法名-->
+
+<!--select * from ordering_sys.user-->
+    <select id="getUserList" resultType="User" statementType="CALLABLE">
+        call ordering_sys.getUserList()
+    </select>
+
+    <select id="getUserById" parameterType="int" resultType="User">
+        select * from ordering_sys.user where userId = #{userId}
+    </select>
+
+    <select id="getUserByName" parameterType="String" resultType="User">
+        select * from ordering_sys.user where userName = #{userName}
+    </select>
+
+    <select id="getUserBySuffixName" parameterType="String" resultType="User">
+        select * from ordering_sys.user where userName like "%"#{userName}
+    </select>
+
+    <select id="getUserByPwd" parameterType="String" resultType="User">
+        select * from ordering_sys.user where password = #{password}
+    </select>
+
+    <!--增删改需要提交事务-->
+    <!--对象中的属性可以直接取出来-->
+
+<!--insert into ordering_sys.user values (#{userId}, #{userName}, #{password}, #{balance}, #{authorization})-->
+    <insert id="addUser" parameterType="User" statementType="CALLABLE">
+         call ordering_sys.addUser(#{userId}, #{userName}, #{password}, #{balance}, #{authorization})
+    </insert>
+
+
+    <update id="updateUser" parameterType="User">
+        update ordering_sys.user
+        set userName=#{userName},password=#{password},balance=#{balance}
+        where userId = #{userId}
+    </update>
+
+<!--update ordering_sys.user
+        set balance=#{balance}
+        where userId = #{userId}
+-->
+    <update id="updateBalance" parameterType="User" statementType="CALLABLE">
+        call ordering_sys.updateBalance(#{userId},#{balance})
+    </update>
+
+
+<!--delete from ordering_sys.user where userId=#{userId}-->
+    <delete id="deleteUser" parameterType="int" statementType="CALLABLE">
+        call ordering_sys.deleteUser(#{userId})
+    </delete>
+
+    <select id="getUserByLimit" parameterType="int" resultType="User">
+        select * from ordering_sys.user limit #{param1},#{param2}
+    </select>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xu.dao.MenuMapper">
+    <select id="getMenuList" resultType="Menu">
+        select * from ordering_sys.menu
+    </select>
+    
+    <select id="getDishById" parameterType="int" resultType="Menu">
+        select * from ordering_sys.menu where dishesId=#{dishesId}
+    </select>
+
+    <select id="getDishByName" parameterType="String" resultType="Menu">
+        select * from ordering_sys.menu where dishesName=#{dishesName}
+    </select>
+
+    <select id="getDishBySuffixName" parameterType="String" resultType="Menu">
+        select * from ordering_sys.menu where dishesName like "%"#{dishesId}
+    </select>
+
+    <insert id="addDish" parameterType="Menu">
+        insert into ordering_sys.menu values (#{dishesId}, #{dishesName}, #{unitPrice}, #{category})
+    </insert>
+
+    <update id="updateDish" parameterType="Menu">
+        update ordering_sys.menu
+        set dishesName=#{dishesName},unitPrice=#{unitPrice},category=#{category}
+        where dishesId = #{dishesId}
+    </update>
+
+    <delete id="deleteDish" parameterType="int">
+        delete from ordering_sys.menu where dishesId=#{dishesId}
+    </delete>
+</mapper>
