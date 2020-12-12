@@ -1,6 +1,6 @@
 # OMS
 
-## 1、使用方法
+## 一、使用方法
 
 >  $ git clone https://github.com/xytroot/OMS.git
 
@@ -8,7 +8,7 @@
 
 
 
-## 2、技术栈
+## 二、技术栈
 
 项目管理：Maven
 
