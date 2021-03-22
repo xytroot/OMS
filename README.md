@@ -36,7 +36,7 @@ IDE：IntelliJ IDEA Ultimate 2020.2.2
 
 ## 四、数据库表结构
 
-![image-20201219185831977](README.assets/image-20201219185831977.png)
+![table](README.assets/table.png)
 
 
 
@@ -44,7 +44,7 @@ IDE：IntelliJ IDEA Ultimate 2020.2.2
 
 使用MVC三层架构进行开发：
 
-​                           ![image-20201219190002033](README.assets/image-20201219190002033.png)    
+   ![mvc](README.assets/mvc.svg) 
 
 
 
@@ -84,10 +84,10 @@ IDE：IntelliJ IDEA Ultimate 2020.2.2
 
 ## 六、界面
 
-![image-20201219190122359](README.assets/image-20201219190122359.png)
+![界面1](README.assets/界面1.png)
+
+![界面2](README.assets/界面2.png)
 
 
 
-![image-20201219190135208](README.assets/image-20201219190135208.png)
-
-![image-20201219190151496](README.assets/image-20201219190151496.png)
+![界面3](README.assets/界面3.png)
